@@ -44,15 +44,16 @@ function validateTransfer(e) {
         isValid = false;
     }
     
-    // Validate amount format (only digits)
+    // Validasi format input (harus angka semua)
     if (!/^\d+$/.test(amountValue)) {
         document.getElementById('amountError').textContent = 'Format nominal tidak valid. Hanya boleh berisi angka';
         isValid = false;
+        return false; // Hentikan validasi selanjutnya jika format salah
     }
     
-    const amount = parseInt(amountValue);
+    const amount = parseInt(amountValue, 10);
     
-    // Validate amount range
+    // Validasi range jumlah transfer
     if (amount < 10000 || amount > 50000000) {
         document.getElementById('amountError').textContent = 'Nominal transfer harus antara 10.000 - 50.000.000';
         isValid = false;
