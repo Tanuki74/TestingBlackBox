@@ -56,7 +56,7 @@ function validateTransfer(e) {
     const amount = parseInt(cleanAmount, 10);
     
     // Validasi range jumlah transfer
-    if (isNaN(amount) || amount < 10000 || amount > 50000000) {
+    if (isNaN(amount) || amount < 10000 && amount > 50000000) {
         document.getElementById('amountError').textContent = 'Nominal transfer harus antara 10.000 - 50.000.000';
         isValid = false;
     } else if (amount > accountBalance) {
