@@ -30,7 +30,7 @@ function validateTransfer(e) {
     e.preventDefault();
     
     const accountNumber = accountNumberInput.value.trim();
-    const amount = parseInt(amountInput.value);
+    const amountValue = amountInput.value.trim();
     
     // Reset error messages
     document.getElementById('accountNumberError').textContent = '';
@@ -44,7 +44,15 @@ function validateTransfer(e) {
         isValid = false;
     }
     
-    // Validate amount
+    // Validate amount format (only digits)
+    if (!/^\d+$/.test(amountValue)) {
+        document.getElementById('amountError').textContent = 'Format nominal tidak valid. Hanya boleh berisi angka';
+        isValid = false;
+    }
+    
+    const amount = parseInt(amountValue);
+    
+    // Validate amount range
     if (isNaN(amount) || amount < 10000 || amount > 50000000) {
         document.getElementById('amountError').textContent = 'Nominal transfer harus antara 10.000 - 50.000.000';
         isValid = false;
