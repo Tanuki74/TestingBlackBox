@@ -44,17 +44,19 @@ function validateTransfer(e) {
         isValid = false;
     }
     
-    // Validasi format input (harus angka semua)
-    if (!/^\d+$/.test(amountValue)) {
+    // Validasi format input (hapus karakter non-digit terlebih dahulu)
+    const cleanAmount = amountValue.replace(/\D/g, '');
+    
+    // Jika setelah dibersihkan kosong atau tidak sama dengan input asli
+    if (cleanAmount === '' || cleanAmount !== amountValue) {
         document.getElementById('amountError').textContent = 'Format nominal tidak valid. Hanya boleh berisi angka';
-        isValid = false;
-        return false; // Hentikan validasi selanjutnya jika format salah
+        return false;
     }
     
-    const amount = parseInt(amountValue, 10);
+    const amount = parseInt(cleanAmount, 10);
     
     // Validasi range jumlah transfer
-    if (amount < 10000 || amount > 50000000) {
+    if (isNaN(amount) || amount < 10000 || amount > 50000000) {
         document.getElementById('amountError').textContent = 'Nominal transfer harus antara 10.000 - 50.000.000';
         isValid = false;
     } else if (amount > accountBalance) {
