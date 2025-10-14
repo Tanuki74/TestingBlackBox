@@ -19,6 +19,7 @@ const transactionResult = document.getElementById('transactionResult');
 document.getElementById('submitBtn').addEventListener('click', validateTransfer);
 document.getElementById('verifyOtpBtn').addEventListener('click', verifyOtp);
 document.getElementById('newTransactionBtn').addEventListener('click', resetForm);
+document.getElementById('updateBalanceBtn').addEventListener('click', updateBalance);
 
 // Update balance display on page load
 function updateBalanceDisplay() {
@@ -150,4 +151,21 @@ function resetForm() {
     
     // Reset OTP for security
     currentOtp = '';
+}
+
+// Update balance for testing purposes (does not affect daily limit)
+function updateBalance() {
+    const newBalance = parseInt(document.getElementById('editBalance').value);
+    
+    if (isNaN(newBalance) || newBalance < 0) {
+        alert('Masukkan nominal saldo yang valid (minimal 0)');
+        return;
+    }
+    
+    accountBalance = newBalance;
+    updateBalanceDisplay();
+    document.getElementById('editBalance').value = '';
+    
+    console.log(`Saldo diupdate menjadi: ${accountBalance.toLocaleString('id-ID')}`);
+    console.log(`Daily limit tetap: ${dailyTotal.toLocaleString('id-ID')} / ${DAILY_LIMIT.toLocaleString('id-ID')}`);
 }
