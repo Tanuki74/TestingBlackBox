@@ -20,6 +20,14 @@ document.getElementById('submitBtn').addEventListener('click', validateTransfer)
 document.getElementById('verifyOtpBtn').addEventListener('click', verifyOtp);
 document.getElementById('newTransactionBtn').addEventListener('click', resetForm);
 
+// Update balance display on page load
+function updateBalanceDisplay() {
+    document.getElementById('balanceDisplay').textContent = accountBalance.toLocaleString('id-ID');
+}
+
+// Initialize balance display
+updateBalanceDisplay();
+
 // Generate random 6-digit OTP
 function generateOTP() {
     return Math.floor(100000 + Math.random() * 900000).toString();
@@ -109,6 +117,9 @@ function processTransfer() {
     // Update balance and daily total
     accountBalance -= amount;
     dailyTotal += amount;
+    
+    // Update balance display
+    updateBalanceDisplay();
     
     // Show success message
     const message = `Transfer sebesar ${amount.toLocaleString('id-ID')} ke rekening ${accountNumber} berhasil!<br>Saldo Anda: ${accountBalance.toLocaleString('id-ID')}`;

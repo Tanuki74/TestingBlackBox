@@ -45,10 +45,32 @@
             color: green;
             font-weight: bold;
         }
+        .balance-info {
+            background-color: #f0f8ff;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .balance-info h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .balance-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
     </style>
 </head>
 <body>
     <h1>Transfer Bank</h1>
+    
+    <div class="balance-info">
+        <h3>Saldo Rekening Anda</h3>
+        <div class="balance-amount">Rp <span id="balanceDisplay">0</span></div>
+    </div>
+    
     <div id="transferForm">
         <div class="form-group">
             <label for="accountNumber">Nomor Rekening Tujuan:</label>
